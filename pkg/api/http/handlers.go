@@ -2,14 +2,13 @@ package http
 
 import (
 	"context"
-	"sync"
-
 	"github.com/EinStack/glide/pkg/api/schemas"
 	"github.com/EinStack/glide/pkg/routers"
 	"github.com/EinStack/glide/pkg/telemetry"
 	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 	"go.uber.org/zap"
+	"sync"
 )
 
 type Handler = func(c *fiber.Ctx) error

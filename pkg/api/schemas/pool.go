@@ -37,3 +37,37 @@ func ReleaseChatResponse(res *ChatResponse) {
 	*res = ChatResponse{}
 	chatResponsePool.Put(res)
 }
+
+var chatStreamMessagePool = sync.Pool{
+	New: func() interface{} {
+		return &ChatStreamMessage{}
+	},
+}
+
+var chatStreamRequestPool = sync.Pool{
+	New: func() interface{} {
+		return &ChatStreamRequest{}
+	},
+}
+
+// GetChatStreamMessage gets objects from the pool
+func GetChatStreamMessage() *ChatStreamMessage {
+	return chatStreamMessagePool.Get().(*ChatStreamMessage)
+}
+
+// ReleaseChatStreamMessage releases objects back to the pool
+func ReleaseChatStreamMessage(msg *ChatStreamMessage) {
+	*msg = ChatStreamMessage{}
+	chatStreamMessagePool.Put(msg)
+}
+
+// GetChatStreamRequest gets objects from the pool
+func GetChatStreamRequest() *ChatStreamRequest {
+	return chatStreamRequestPool.Get().(*ChatStreamRequest)
+}
+
+// ReleaseChatStreamRequest releases objects back to the pool
+func ReleaseChatStreamRequest(req *ChatStreamRequest) {
+	*req = ChatStreamRequest{}
+	chatStreamRequestPool.Put(req)
+}
